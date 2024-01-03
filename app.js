@@ -1,6 +1,7 @@
 const sections = document.querySelectorAll('.sections');
 const sectBtns = document.querySelectorAll('.controls');
 const sectBtn = document.querySelectorAll('.control');
+const allSections = document.querySelector('.main-content');
 
 function PageTransitions(){
     //Button click active class
@@ -11,6 +12,27 @@ function PageTransitions(){
             this.className += ' active-btn';
         });
     }
+
+    //Sections Active
+    allSections.addEventListener('click', (e) =>{
+        const id = e.target.dataset.id;
+        if(id){
+            //remove selected from the other buttons
+            sectBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            e.target.classList.add('active');
+
+            //hide other sections
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            const element = document.getElementById(id);
+            element.classList.add('active');
+        }
+    });
 }
 
 PageTransitions();
